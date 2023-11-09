@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "multiformats": "^12.1.3"
+  }
+}
