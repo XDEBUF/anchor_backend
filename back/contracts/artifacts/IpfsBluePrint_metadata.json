@@ -1,0 +1,74 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "fileHash",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "fileName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "fileType",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "date",
+						"type": "string"
+					}
+				],
+				"name": "addFile",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"IpfsBluePrint.sol": "IpfsBluePrint"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"IpfsBluePrint.sol": {
+			"keccak256": "0x78a656b521a3b91704bb7724b966e8f3e549e67902802d10dee28f0aa102d4eb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7b2d5cf2e31d4f0b39a2a3abf32dbbb2e878532f4631a3c2caba29cff45ffa27",
+				"dweb:/ipfs/QmXwudLeLFxqzU3nJMYCpxMdKyyve162D6gJZMPBEuHgeX"
+			]
+		}
+	},
+	"version": 1
+}
