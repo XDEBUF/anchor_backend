@@ -51,18 +51,24 @@ export function toStoreFile(req, res, next) {
   const filehash = toEncodeContentFile(fileuri);
   console.log(filehash);
   const fileContent = toReadFile(fileuri);
-  const cid = storeToIpfs(fileuri);
+  let cid;
+  storeToIpfs(fileuri).then((result) => {
+   console.log('resultat: ',result);
+   cid = result
+  }).catch((err) => {
+    console.log(err);
+  });;
   console.log(cid);
   console.log('après stored');
   const filesCid = {
     filehash : filehash,
     fileContent : fileContent ,
-    //cid : cid
+    cid : cid
    };
    console.log(filesCid.filehash,filesCid.cid);
    console.log('ici avant post')
    const dbo=getDb();
-   var myobj = { name: "Company Inc", address: "Highway 37" };
+   //var myobj = { name: "Company Inc", address: "Highway 37" };
    dbo.collection("fichier_et_metadata").insertOne(filesCid, function(err, res) {
      if (err) throw err;
      console.log("1 document inserted");});

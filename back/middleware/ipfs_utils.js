@@ -18,8 +18,8 @@ export async function storeToIpfs (dataFile) {
      //   console.info('add event', evt.type, evt.detail)
      // }
     })
-    
-    console.log('Added file:', cid.toString())
+    const cid_toString = cid.toString()
+    console.log('Added file:',cid_toString)
     
     // this decoder will turn Uint8Arrays into strings
     const decoder = new TextDecoder()
@@ -36,5 +36,5 @@ export async function storeToIpfs (dataFile) {
     }
     
     console.log('Added file contents:', text)
-return cid.toString();
+return cid_toString;
 }
