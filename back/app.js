@@ -7,8 +7,9 @@ import pkg2 from 'mongoose';
 const { mongoose } = pkg2;
 import multer, { diskStorage } from 'multer';
 
-import {feedRoutes} from './routes/feed.js';
+// import {feedRoutes} from './routes/feed.js';
 import {connectToDb, getDb} from './middleware/connectDb.js';
+import router from './routes/index.js'
 
 
 const app = express();
@@ -55,8 +56,7 @@ app.use((req, res, next) => {
   
   next();
 });
-
-app.use('/feed', feedRoutes);
+app.use('/feed', router);
 //app.use('/auth', authRoutes);
 
 app.use((error, req, res, next) => {

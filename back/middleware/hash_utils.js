@@ -15,13 +15,13 @@ export function toEncodeSha256(contentFile){
     //console.log(hash.hex());
     return hash.hex();
 }
-export function toReadFile(localPathFile) {
-    const data = readFileSync(localPathFile)
+export function toReadFile(fileLocalPath) {
+    const data = readFileSync(fileLocalPath)
     return data;
 }
-export function toEncodeContentFile(localPathFile) {
-    const content = this.toReadFile(localPathFile);
-    const hashContent = this.toEncodeSha256(content);
+export function toEncodeContentFile(fileLocalPath) {
+    const content = toReadFile(fileLocalPath);
+    const hashContent = toEncodeSha256(content);
     //console.log(hashContent);
     return hashContent;
 }

@@ -1,8 +1,9 @@
 import { MongoClient } from "mongodb";
-
+import pkg2 from 'mongoose';
+const { mongoose } = pkg2;
 let dbConnection;
-export function connectToDb(cb) {
-    MongoClient.connect("mongodb://0.0.0.0:27017/poc_hash_storage")
+export async function connectToDb(cb) {
+    mongoose.connect("mongodb://0.0.0.0:27017/poc_hash_storage")
         .then((client) => {
             dbConnection = client.db();
             return cb();

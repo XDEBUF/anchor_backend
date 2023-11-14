@@ -1,13 +1,40 @@
 import { createHelia } from 'helia'
 import { unixfs } from '@helia/unixfs'
 import { CID } from 'multiformats/cid'
-
+import { toReadFile } from './hash_utils.js';
 
 export async function storeToIpfs (dataFile) { 
-const helia = await createHelia();
+    const helia = await createHelia()
 
-const fs = unixfs(helia);
-const c =fs.cat(CID.parse(utils.toReadFile(dataFile)));
-console.log('cid= ',c)
-return c;
+    // create a filesystem on top of Helia, in this case it's UnixFS
+    const fs = unixfs(helia)
+    
+    // we will use this TextEncoder to turn strings into Uint8Arrays
+    const encoder = new TextEncoder()
+    
+    // add the bytes to your node and receive a unique content identifier
+    const cid = await fs.addBytes(encoder.encode('Hello World 101'), {
+     // onProgress: (evt) => {
+     //   console.info('add event', evt.type, evt.detail)
+     // }
+    })
+    
+    console.log('Added file:', cid.toString())
+    
+    // this decoder will turn Uint8Arrays into strings
+    const decoder = new TextDecoder()
+    let text = ''
+    
+    for await (const chunk of fs.cat(cid, {
+      //onProgress: (evt) => {
+      //  console.info('cat event', evt.type, evt.detail)
+     // }
+    })) {
+      text += decoder.decode(chunk, {
+        stream: true
+      })
+    }
+    
+    console.log('Added file contents:', text)
+return cid.toString();
 }

@@ -12,12 +12,17 @@ const postSchema = new Schema(
       type: String,
       required: true
     },
-    stored : {
-      type: String,
-      required: true
-    }
+   /// cid : {
+    //  type: String,
+    //  required: true
+    //}
+
   },
-  { timestamps: true }
+  { timestamps: true,
+    bufferCommands: false,
+  autoCreate: false
+   },
+  
 );
 
 export default model('fichier_et_metadata', postSchema);

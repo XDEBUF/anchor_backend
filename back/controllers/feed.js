@@ -3,14 +3,14 @@ import { join } from 'path';
 
 //import { validationResult } from 'express-validator/check';
 
-import Post from '../models/post.js';
+import FilesCid from '../models/post.js';
 //import { findById } from '../models/user.js';
 import { toEncodeContentFile, toReadFile } from '../middleware/hash_utils.js';
 import { storeToIpfs } from '../middleware/ipfs_utils.js';
 export function posts(req, res, next) {
   const currentPage = req.query.count || 1;
   let totalItems;
-  Post.find()
+  FilesCid.find()
     .countDocuments()
     .then(count => {
       totalItems = count;
@@ -41,27 +41,31 @@ export function toStoreFile(req, res, next) {
     error.statusCode = 422;
     throw error;
   }*/
-  if (!req.file) {
+  if (!req.file || !req.file.path) {
     const error = new Error('No file provided.');
     error.statusCode = 422;
     throw error;
   }
-  fileuri = req.file.path;
-  filehash = toEncodeContentFile(fileuri);
-    fileContent = toReadFile(fileuri);
-    stored = storeToIpfs(fileContent);
-  const post = new Post({
+  const fileuri = req.file.path;
+  console.log(fileuri);
+  const filehash = toEncodeContentFile(fileuri);
+  console.log(filehash);
+  const fileContent = toReadFile(fileuri);
+  const cid = storeToIpfs(fileuri);
+  
+  console.log('après stored');
+  const filesCid = new FilesCid({
     filehash : filehash,
     fileContent : fileContent ,
-    stored : stored
- 
+    //cid : cid
    });
+   console.log(filesCid.filehash,filesCid.cid);
    console.log('ici avant post')
-post
+   filesCid
     .save()
     .then(res => {res.status(200).json({
       message: 'file upload successfully!',
-        post: post,
+        filesCid: FilesCid,
      //   creator: { _id: creator._id, name: creator.name }
       })
 })
@@ -76,7 +80,7 @@ post
 
 export function getPost(req, res, next) {
   const postId = req.params.postId;
-  Post.findById(postId)
+  FilesCid.findById(postId)
     .then(post => {
       if (!post) {
         const error = new Error('Could not find post.');
@@ -112,7 +116,7 @@ export function updatePost(req, res, next) {
     error.statusCode = 422;
     throw error;
   }
-  Post.findById(postId)
+  FilesCid.findById(postId)
     .then(post => {
       if (!post) {
         const error = new Error('Could not find post.');
@@ -145,7 +149,7 @@ export function updatePost(req, res, next) {
 
 export function deletePost(req, res, next) {
   const postId = req.params.postId;
-  Post.findById(postId)
+  FilesCid.findById(postId)
     .then(post => {
       if (!post) {
         const error = new Error('Could not find post.');
