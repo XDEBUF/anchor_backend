@@ -52,7 +52,7 @@ export function toStoreFile(req, res, next) {
   console.log(filehash);
   const fileContent = toReadFile(fileuri);
   const cid = storeToIpfs(fileuri);
-  
+  console.log(cid);
   console.log('après stored');
   const filesCid = new FilesCid({
     filehash : filehash,
