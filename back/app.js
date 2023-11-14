@@ -1,15 +1,13 @@
-import { join } from 'path';
-import express from 'express';
+ const join =require('path');
+const express=require('express');
 
-import pkg from 'body-parser';
-const { json } = pkg;
-import pkg2 from 'mongoose';
-const { mongoose } = pkg2;
-import multer, { diskStorage } from 'multer';
+const json =require('body-parser');
+const  mongoose  = require ('mongoose');
+const multer = require ('multer');
 
 // import {feedRoutes} from './routes/feed.js';
-import {connectToDb, getDb} from './middleware/connectDb.js';
-import router from './routes/index.js'
+const dbo =require('./middleware/connectDb.js');
+const router = require('./routes/index.js');
 
 
 const app = express();

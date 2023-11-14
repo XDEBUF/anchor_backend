@@ -1,8 +1,6 @@
-import { MongoClient } from "mongodb";
-import pkg2 from 'mongoose';
-const { mongoose } = pkg2;
+ MongoClient=require("mongodb");
 let dbConnection;
-export async function connectToDb(cb) {
+ connectToDb=(cb) => {
     MongoClient.connect("mongodb://0.0.0.0:27017/poc_hash_storage")
     /*,{
         useNewUrlParser: true,
@@ -23,4 +21,4 @@ export async function connectToDb(cb) {
         console.log("mongodb connection open");*/
         //});
 }
-export function getDb() { return dbConnection; }
+getDb = () => { return dbConnection; }

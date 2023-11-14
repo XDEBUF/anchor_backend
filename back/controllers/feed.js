@@ -1,13 +1,13 @@
-import { unlink } from 'fs';
-import { join } from 'path';
+const unlink=require('fs');
+const join =require('path');
 
 //import { validationResult } from 'express-validator/check';
-import { getDb } from '../middleware/connectDb.js';
-import FilesCid from '../models/post.js';
+const getDb =require ('../middleware/connectDb.js');
+const FilesCid = require('../models/post.js');
 //import { findById } from '../models/user.js';
-import { toEncodeContentFile, toReadFile } from '../middleware/hash_utils.js';
-import { storeToIpfs } from '../middleware/ipfs_utils.js';
-export function posts(req, res, next) {
+const hash_utils=require('../middleware/hash_utils.js');
+const storeToIpfs = require('../middleware/ipfs_utils.js');
+ posts=(req, res, next) => {
   const currentPage = req.query.count || 1;
   let totalItems;
   FilesCid.find()
@@ -32,8 +32,7 @@ export function posts(req, res, next) {
       next(err);
     });
 }
-
-export function toStoreFile(req, res, next) {
+ toStoreFile= (req, res, next) =>{
   console.log('in toStoreFile Controller')
   //const errors = validationResult(req);
  /*if (!errors.isEmpty()) {
@@ -87,7 +86,7 @@ export function toStoreFile(req, res, next) {
     });*/
 }
 
-export function getPost(req, res, next) {
+getPost=(req, res, next) =>{
   const postId = req.params.postId;
   FilesCid.findById(postId)
     .then(post => {
@@ -106,7 +105,7 @@ export function getPost(req, res, next) {
     });
 }
 
-export function updatePost(req, res, next) {
+ updatePost=(req, res, next) => {
   const postId = req.params.postId;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -156,7 +155,7 @@ export function updatePost(req, res, next) {
     });
 }
 
-export function deletePost(req, res, next) {
+deletePost=(req, res, next) => {
   const postId = req.params.postId;
   FilesCid.findById(postId)
     .then(post => {

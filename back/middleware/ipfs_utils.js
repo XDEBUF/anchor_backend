@@ -1,9 +1,9 @@
-import { createHelia } from 'helia'
-import { unixfs } from '@helia/unixfs'
-import { CID } from 'multiformats/cid'
-import { toReadFile } from './hash_utils.js';
+ createHelia =require('helia')
+ unixfs =require ('@helia/unixfs')
+ CID =require ('multiformats/cid')
+toReadFile =require('./hash_utils.js');
 
-export async function storeToIpfs (dataFile) { 
+ const storeToIpfs = async (dataFile) => { 
     const helia = await createHelia()
 
     // create a filesystem on top of Helia, in this case it's UnixFS
