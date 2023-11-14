@@ -20,7 +20,7 @@ const postSchema = new Schema(
   },
   { timestamps: true,
     bufferCommands: false,
-  autoCreate: false
+    autoCreate: false
    },
   
 );

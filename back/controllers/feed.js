@@ -2,7 +2,7 @@ import { unlink } from 'fs';
 import { join } from 'path';
 
 //import { validationResult } from 'express-validator/check';
-
+import { getDb } from '../middleware/connectDb.js';
 import FilesCid from '../models/post.js';
 //import { findById } from '../models/user.js';
 import { toEncodeContentFile, toReadFile } from '../middleware/hash_utils.js';
@@ -54,16 +54,19 @@ export function toStoreFile(req, res, next) {
   const cid = storeToIpfs(fileuri);
   console.log(cid);
   console.log('après stored');
-  const filesCid = new FilesCid({
+  const filesCid = {
     filehash : filehash,
     fileContent : fileContent ,
     //cid : cid
-   });
+   };
    console.log(filesCid.filehash,filesCid.cid);
    console.log('ici avant post')
-   filesCid
-    .save()
-    .then(res => {res.status(200).json({
+   const dbo=getDb();
+   var myobj = { name: "Company Inc", address: "Highway 37" };
+   dbo.collection("fichier_et_metadata").insertOne(filesCid, function(err, res) {
+     if (err) throw err;
+     console.log("1 document inserted");});
+    /*.then(res => {res.status(200).json({
       message: 'file upload successfully!',
         filesCid: FilesCid,
      //   creator: { _id: creator._id, name: creator.name }
@@ -75,7 +78,7 @@ export function toStoreFile(req, res, next) {
         err.statusCode = 500;
       }
       next(err);
-    });
+    });*/
 }
 
 export function getPost(req, res, next) {
