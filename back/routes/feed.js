@@ -1,10 +1,14 @@
 //import { body } from 'express-validator/check';
 
-import { toStoreFile, getPost, updatePost, deletePost } from '../controllers/feed.js';
+ feed = require('../controllers/feed.js');
 //import {isAuth} from '../middleware/is-auth.js';
 
+const  Router = require('express');
 
-export function initRoutesFeed(router) 
+const router = Router();
+
+// initRoutesAuth(router);
+const initRoutesFeed = (router) =>
 {
   router.post(
     '/post',
@@ -17,12 +21,12 @@ export function initRoutesFeed(router)
         .trim()
         .isLength({ min: 5 })
     ],*/
-    toStoreFile,
+    feed.toStoreFile,
   );
   
-  router.get('/post/:postId', getPost);
+ // router.get('/post/:postId', getPost);
   
-  router.put(
+  /*router.put(
     '/post/:postId',
     /*isAuth,
     [
@@ -33,12 +37,12 @@ export function initRoutesFeed(router)
         .trim()
         .isLength({ min: 5 })
     ],*/
-    updatePost
-  );
+    //updatePost
+  //);
   
   router.delete('/post/:postId', deletePost);
 }
-
+module.exports = initRoutesFeed (router);
 // GET /feed/posts
 //router.get('/posts', isAuth, feedController.getPosts);
 

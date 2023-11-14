@@ -1,9 +1,10 @@
- createHelia =require('helia')
- unixfs =require ('@helia/unixfs')
- CID =require ('multiformats/cid')
-toReadFile =require('./hash_utils.js');
 
- const storeToIpfs = async (dataFile) => { 
+/*
+ * TODO Transpose CommonJS;
+*/
+ const storeToIpfs = async () => { 
+  const { createHelia } = await import('helia')
+  const { unixfs } = await import('@helia/unixfs')
     const helia = await createHelia()
 
     // create a filesystem on top of Helia, in this case it's UnixFS
@@ -38,3 +39,4 @@ toReadFile =require('./hash_utils.js');
     console.log('Added file contents:', text)
 return cid_toString;
 }
+module.exports = storeToIpfs;

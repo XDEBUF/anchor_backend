@@ -7,7 +7,7 @@ const FilesCid = require('../models/post.js');
 //import { findById } from '../models/user.js';
 const hash_utils=require('../middleware/hash_utils.js');
 const storeToIpfs = require('../middleware/ipfs_utils.js');
- posts=(req, res, next) => {
+ const posts=(req, res, next) => {
   const currentPage = req.query.count || 1;
   let totalItems;
   FilesCid.find()
@@ -31,8 +31,8 @@ const storeToIpfs = require('../middleware/ipfs_utils.js');
       }
       next(err);
     });
-}
- toStoreFile= (req, res, next) =>{
+};
+ module.exports = toStoreFile = (req, res, next)=>{
   console.log('in toStoreFile Controller')
   //const errors = validationResult(req);
  /*if (!errors.isEmpty()) {
@@ -84,9 +84,9 @@ const storeToIpfs = require('../middleware/ipfs_utils.js');
       }
       next(err);
     });*/
-}
+};
 
-getPost=(req, res, next) =>{
+const getPost=(req, res, next) =>{
   const postId = req.params.postId;
   FilesCid.findById(postId)
     .then(post => {
@@ -105,7 +105,7 @@ getPost=(req, res, next) =>{
     });
 }
 
- updatePost=(req, res, next) => {
+ const updatePost=(req, res, next) => {
   const postId = req.params.postId;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -155,7 +155,7 @@ getPost=(req, res, next) =>{
     });
 }
 
-deletePost=(req, res, next) => {
+const deletePost=(req, res, next) => {
   const postId = req.params.postId;
   FilesCid.findById(postId)
     .then(post => {

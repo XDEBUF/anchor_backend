@@ -1,12 +1,10 @@
 
-const  Router =reuqire('express');
+const  Router = require('express');
 
 const router = Router();
 
 // import { initRoutesAuth } from './auth.js';
- initRoutesFeed =require("./feed.js");
+const routes = require("./feed.js");
 
 // initRoutesAuth(router);
-initRoutesFeed(router);
-
-export default router;
+routes.initRoutesFeed(router);

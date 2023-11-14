@@ -1,8 +1,8 @@
 
-import pkg from 'mongoose';
-const {  Schema, model } = pkg;
+const mongoose = require('mongoose');
 
-const postSchema = new Schema(
+
+const postSchema = new mongoose.Schema(
   {
     filehash: {
       type: String,
@@ -25,4 +25,4 @@ const postSchema = new Schema(
   
 );
 
-export default model('fichier_et_metadata', postSchema);
+module.exports = mongoose.model('fichier_et_metadata', postSchema);
